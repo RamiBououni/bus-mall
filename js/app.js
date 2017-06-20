@@ -37,3 +37,18 @@ function renderImage(imgName) {
     imageParent.appendChild(img);
   }
 }
+//setup images on the page
+function setup() {
+  imageName1 = generateRandomImageName();
+  imageName2 = generateRandomImageName();
+  imageName3 = generateRandomImageName();
+  //check if images are duplicate in the current set
+  while (imageName1 == imageName2 || imageName1 == imageName3 || imageName2 == imageName3) {
+    imageName1 = generateRandomImageName();
+    imageName2 = generateRandomImageName();
+    imageName3 = generateRandomImageName();
+  }
+  renderImage(imageName1);
+  renderImage(imageName2);
+  renderImage(imageName3);
+}
