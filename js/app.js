@@ -25,7 +25,6 @@ function generateRandomImageName() {
 }
 
 
-
 // render images
 function renderImage(imgName) {
   imageParent = document.getElementById('images');
@@ -50,15 +49,15 @@ function setup() {
   imageName2 = generateRandomImageName();
   imageName3 = generateRandomImageName();
   //check if images are duplicate in the current set
-  while (imageName1 == imageName2 || imageName1 == imageName3 || imageName2 == imageName3) {
+  while (imageName1 == imageName2 || imageName1 == imageName3 || imageName2 == imageName3 || imageName1 == previous[0] || imageName1 == previous[1] || imageName1 == previous[2] || imageName2 == previous[0] || imageName2 == previous[1] || imageName3 == previous[2] || imageName3 == previous[0] || imageName3 == previous[1] || imageName3 == previous[2]) {
     imageName1 = generateRandomImageName();
     imageName2 = generateRandomImageName();
     imageName3 = generateRandomImageName();
   }
-  previous.push(imageName1);
-  previous.push(imageName2);
-  previous.push(imageName3);
-  console.log('previous is:' + previous);
+  current.push(imageName1);
+  current.push(imageName2);
+  current.push(imageName3);
+
   renderImage(imageName1);
   renderImage(imageName2);
   renderImage(imageName3);
@@ -99,48 +98,23 @@ var water = new MakeImages('water');
 var wineGlass = new MakeImages('wineGlass');
 
 
-
-
-
-
-
-//
-
-
 //add the event listener
 imageParent.addEventListener('click', function(event) {
 
-  //check if the three pictures are duplicates
-  //push the current into an array
-  current.push(imageName1);
-  current.push(imageName2);
-  current.push(imageName3);
-  console.log('current is:' + current);
-  console.log('previous is:' + previous);
-  //remove the current images
-  images.innerHTML = '';
-  //check if the new ones are in the array
-  if (previous.includes(imageName1) || previous.includes(imageName2) || previous.includes(imageName3)) {
-    setup();
-  }
+  previous = current.splice(0,3);
 
-  //generate the new ones
-  console.log(previous);
-
+  //check to see which images we have to make sure we have no duplicate
+  console.log('=======');
   console.log(imageName1);
   console.log(imageName2);
   console.log(imageName3);
-  // if(image1 === image2 || image1 === image3){
-  //   setup();
-  // }
+  console.log('previous is:' + previous);
 
+  //remove the current images
+  images.innerHTML = '';
+  //call our function to populate the images
+  setup();
 
-  //log image name and number of times it was selected
-  //   for (var i = 0; i < arrayOfObjects.length; i++) {
-  //     if (imageName1 == arrayOfObjects[i].name) {
-  //       setup();
-  //     }
-  // }
 });
 
 
