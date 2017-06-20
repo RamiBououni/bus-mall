@@ -52,3 +52,30 @@ function setup() {
   renderImage(imageName2);
   renderImage(imageName3);
 }
+//add first set to my empty array duplicate
+duplicate.push(imageName1);
+duplicate.push(imageName2);
+duplicate.push(imageName3);
+console.log(duplicate);
+
+
+//creating my constructor
+function MakeImages(name, filePath, timeShown, timeSelected) {
+  this.name = name,
+    this.filePath = filePath,
+    this.timeShown = timeShown,
+    this.timeSelected = timeSelected;
+}
+
+//making an object for each image
+var arrayOfObjects = [];
+for (var i = 0; i < imageNames.length; i++) {
+  arrayOfObjects.push(new MakeImages(imageNames[i]));
+}
+
+//test show my images objects
+console.log(arrayOfObjects);
+
+
+
+//
