@@ -1,4 +1,11 @@
-img{
+body {
+  background-image: url('http://orig08.deviantart.net/6dc9/f/2015/225/d/3/space_waves_by_elenalight-d95gwwl.png');
+  color: blue;
+  font-family: monospace, sans-serif;
+  font-size: 26px;
+}
+
+img {
   width: 30%;
   height: 300px;
   margin: 10px;
