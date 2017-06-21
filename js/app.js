@@ -6,6 +6,7 @@ var imageName3 = '';
 var imageParent;
 var previous = [];
 var current = [];
+var numberOfTries = 25;
 
 var imageNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
 
@@ -48,16 +49,21 @@ function setup() {
   imageName1 = generateRandomImageName();
   imageName2 = generateRandomImageName();
   imageName3 = generateRandomImageName();
-  //check if images are duplicate in the current set
+  //check if images are duplicate in the current set and in the previous set
   while (imageName1 == imageName2 || imageName1 == imageName3 || imageName2 == imageName3 || imageName1 == previous[0] || imageName1 == previous[1] || imageName1 == previous[2] || imageName2 == previous[0] || imageName2 == previous[1] || imageName3 == previous[2] || imageName3 == previous[0] || imageName3 == previous[1] || imageName3 == previous[2]) {
     imageName1 = generateRandomImageName();
     imageName2 = generateRandomImageName();
     imageName3 = generateRandomImageName();
   }
+  //pushing the images to the current array
   current.push(imageName1);
   current.push(imageName2);
   current.push(imageName3);
 
+  //test content of current array
+  console.log('current is:' + current);
+
+  //render images to the page
   renderImage(imageName1);
   renderImage(imageName2);
   renderImage(imageName3);
@@ -67,12 +73,11 @@ function setup() {
 
 //creating my constructor
 function MakeImages(name, filePath, timeShown, timeSelected) {
-    this.name = name,
+  this.name = name,
     this.filePath = 'img/' + name + '.jpg',
     this.timeShown = 0,
     this.timeSelected = 0;
 }
-
 
 //making an object for each image
 
@@ -101,20 +106,27 @@ var wineGlass = new MakeImages('wineGlass');
 //add the event listener
 imageParent.addEventListener('click', function(event) {
 
-  previous = current.splice(0,3);
+  //stop the game after 25 tries
+  if (numberOfTries === 0) {
+    images.innerHTML = '';
+  } else {
 
-  //check to see which images we have to make sure we have no duplicate
-  console.log('=======');
-  console.log(imageName1);
-  console.log(imageName2);
-  console.log(imageName3);
-  console.log('previous is:' + previous);
+    //push the current images to the previous array
+    previous = current.splice(0, 3);
 
-  //remove the current images
-  images.innerHTML = '';
-  //call our function to populate the images
-  setup();
+    //check to see which images we have to make sure we have no duplicate
+    console.log('=======');
+    console.log('previous is:' + previous);
 
+    //make the test stop at 25
+    numberOfTries--;
+
+    //remove the current images so the new images will take its place
+    images.innerHTML = '';
+
+    //call our function to populate the images
+    setup();
+  }
 });
 
 
