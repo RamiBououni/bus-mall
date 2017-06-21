@@ -4,6 +4,7 @@ var imageName1 = '';
 var imageName2 = '';
 var imageName3 = '';
 var imageParent;
+var img;
 var previous = [];
 var current = [];
 var numberOfTries = 25;
@@ -29,18 +30,23 @@ function generateRandomImageName() {
 // render images
 function renderImage(imgName) {
   imageParent = document.getElementById('images');
-  var img = document.createElement('img');
+  img = document.createElement('img');
   //set extensions for the images
   if (imgName === 'sweep') {
     img.setAttribute('src', 'img/' + imgName + '.png');
+    img.setAttribute('id', imgName);
     imageParent.appendChild(img);
   } else if (imgName === 'usb') {
     img.setAttribute('src', 'img/' + imgName + '.gif');
+    img.setAttribute('id', imgName);
     imageParent.appendChild(img);
   } else {
     img.setAttribute('src', 'img/' + imgName + '.jpg');
+    img.setAttribute('id', imgName);
     imageParent.appendChild(img);
   }
+  //check my images IDs
+  console.log(img.id);
 }
 
 
@@ -63,6 +69,7 @@ function setup() {
   //test content of current array
   console.log('current is:' + current);
 
+
   //render images to the page
   renderImage(imageName1);
   renderImage(imageName2);
@@ -79,7 +86,7 @@ function MakeImages(name, filePath, timeShown, timeSelected) {
     this.timeSelected = 0;
 }
 
-//making an object for each image
+//making an array of objects for each image
 
 var bag = new MakeImages('bag');
 var banana = new MakeImages('banana');
@@ -102,17 +109,30 @@ var usb = new MakeImages('usb');
 var water = new MakeImages('water');
 var wineGlass = new MakeImages('wineGlass');
 
+var arrayOfObjects = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, water, wineGlass];
 
 //add the event listener
 imageParent.addEventListener('click', function(event) {
 
   //stop the game after 25 tries
-  if (numberOfTries === 0) {
-    images.innerHTML = '';
-  } else {
+  if (numberOfTries !== 0) {
+
+    //check which image is clicked
+    console.log(img.id);
 
     //push the current images to the previous array
     previous = current.splice(0, 3);
+
+    //add the number of times selected
+    for (var i = 0; i < arrayOfObjects.length; i++) {
+      if (img.id == arrayOfObjects[i].name) {
+        arrayOfObjects[i].timeSelected++;
+        //test times selected
+        console.log('555555555');
+        console.log(arrayOfObjects[i].name + ' was selected:' + arrayOfObjects[i].timeSelected + ' time.');
+      }
+    }
+
 
     //check to see which images we have to make sure we have no duplicate
     console.log('=======');
@@ -126,6 +146,16 @@ imageParent.addEventListener('click', function(event) {
 
     //call our function to populate the images
     setup();
+
+
+  } else {
+    images.innerHTML = '';
+    var parentResponse = document.getElementById('response');
+    for (i = 0; i < arrayOfObjects.length; i++) {
+      var p = document.createElement('p');
+      p.textContent = arrayOfObjects[i].name + ' was selected ' + arrayOfObjects[i].timeSelected + ' time(s).';
+      parentResponse.appendChild(p);
+    }
   }
 });
 
