@@ -16,16 +16,13 @@ console.log(generateRandomImageName());
 //test random number
 console.log(Math.floor(Math.random() * imageNames.length));
 
-
 setup();
-
 
 //generate random image name
 function generateRandomImageName() {
   var index = Math.floor(Math.random() * imageNames.length);
   return imageNames[index];
 }
-
 
 // render images
 function renderImage(imgName) {
@@ -49,7 +46,6 @@ function renderImage(imgName) {
   console.log(img.id);
 }
 
-
 //setup images on the page
 function setup() {
   imageName1 = generateRandomImageName();
@@ -68,7 +64,6 @@ function setup() {
 
   //test content of current array
   console.log('current is:' + current);
-
 
   //render images to the page
   renderImage(imageName1);
@@ -111,12 +106,45 @@ var wineGlass = new MakeImages('wineGlass');
 
 var arrayOfObjects = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, water, wineGlass];
 
+function chart() {
+  var canvas = document.getElementById('chart');
+  var ctx = canvas.getContext('2d');
+
+  // modeled after the Getting Started example in the chartJS docs
+  var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'bar',
+
+    // The data for our dataset
+    data: {
+      labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'],
+      datasets: [{
+        label: 'Number of times images was selected',
+        backgroundColor: 'rgb(131, 25, 25)',
+        borderColor: 'rgb(19, 9, 11)',
+        data: [bag.timeSelected, banana.timeSelected, bathroom.timeSelected, boots.timeSelected, breakfast.timeSelected, bubblegum.timeSelected, chair.timeSelected, cthulhu.timeSelected, dogDuck.timeSelected, dragon.timeSelected, pen.timeSelected, petSweep.timeSelected, scissors.timeSelected, shark.timeSelected, sweep.timeSelected, tauntaun.timeSelected, unicorn.timeSelected, usb.timeSelected, water.timeSelected, wineGlass.timeSelected],
+      }]
+    },
+
+    // Configuration options go here
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
+
+
 //add the event listener
 imageParent.addEventListener('click', function(event) {
 
   //stop the game after 25 tries
   if (numberOfTries !== 0) {
-
     //check which image is clicked
     console.log(img.id);
 
@@ -133,12 +161,11 @@ imageParent.addEventListener('click', function(event) {
       }
     }
 
-
     //check to see which images we have to make sure we have no duplicate
     console.log('=======');
     console.log('previous is:' + previous);
 
-    //make the test stop at 25
+    //to make the test stop at 25
     numberOfTries--;
 
     //remove the current images so the new images will take its place
@@ -155,6 +182,8 @@ imageParent.addEventListener('click', function(event) {
       var p = document.createElement('p');
       p.textContent = arrayOfObjects[i].name + ' was selected ' + arrayOfObjects[i].timeSelected + ' time(s).';
       parentResponse.appendChild(p);
+
+      chart();
     }
   }
 });
