@@ -9,7 +9,32 @@ var previous = [];
 var current = [];
 var numberOfTries = 25;
 
-var imageNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'];
+var imageNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'];
+
+//making an array of objects for each image
+
+var bag = new MakeImages('bag');
+var banana = new MakeImages('banana');
+var bathroom = new MakeImages('bathroom');
+var boots = new MakeImages('boots');
+var breakfast = new MakeImages('breakfast');
+var bubblegum = new MakeImages('bubblegum');
+var chair = new MakeImages('chair');
+var cthulhu = new MakeImages('cthulhu');
+var dogDuck = new MakeImages('dogDuck');
+var dragon = new MakeImages('dragon');
+var pen = new MakeImages('pen');
+var petSweep = new MakeImages('petSweep');
+var scissors = new MakeImages('scissors');
+var shark = new MakeImages('shark');
+var sweep = new MakeImages('sweep');
+var tauntaun = new MakeImages('tauntaun');
+var unicorn = new MakeImages('unicorn');
+var usb = new MakeImages('usb');
+var water = new MakeImages('water');
+var wineGlass = new MakeImages('wineGlass');
+
+var arrayOfObjects = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, water, wineGlass];
 
 //test generateRandomImageName
 console.log(generateRandomImageName());
@@ -69,6 +94,13 @@ function setup() {
   renderImage(imageName1);
   renderImage(imageName2);
   renderImage(imageName3);
+
+  //add the number of times shown
+  for (var i = 0; i < arrayOfObjects.length; i++) {
+    if (arrayOfObjects[i].name == current[0] || arrayOfObjects[i].name == current[1] || arrayOfObjects[i].name == current[2]) {
+      arrayOfObjects[i].timeShown++;
+    }
+  }
 }
 
 //TODO change the constructor to get all the extensions
@@ -80,31 +112,6 @@ function MakeImages(name, filePath, timeShown, timeSelected) {
     this.timeShown = 0,
     this.timeSelected = 0;
 }
-
-//making an array of objects for each image
-
-var bag = new MakeImages('bag');
-var banana = new MakeImages('banana');
-var bathroom = new MakeImages('bathroom');
-var boots = new MakeImages('boots');
-var breakfast = new MakeImages('breakfast');
-var bubblegum = new MakeImages('bubblegum');
-var chair = new MakeImages('chair');
-var cthulhu = new MakeImages('cthulhu');
-var dogDuck = new MakeImages('dogDuck');
-var dragon = new MakeImages('dragon');
-var pen = new MakeImages('pen');
-var petSweep = new MakeImages('petSweep');
-var scissors = new MakeImages('scissors');
-var shark = new MakeImages('shark');
-var sweep = new MakeImages('sweep');
-var tauntaun = new MakeImages('tauntaun');
-var unicorn = new MakeImages('unicorn');
-var usb = new MakeImages('usb');
-var water = new MakeImages('water');
-var wineGlass = new MakeImages('wineGlass');
-
-var arrayOfObjects = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, water, wineGlass];
 
 function chart() {
   var canvas = document.getElementById('chart');
@@ -139,9 +146,8 @@ function chart() {
   });
 }
 
-
 //add the event listener
-imageParent.addEventListener('click', function(event) {
+imageParent.addEventListener('click', function() {
 
   //stop the game after 25 tries
   if (numberOfTries !== 0) {
@@ -153,6 +159,7 @@ imageParent.addEventListener('click', function(event) {
 
     //add the number of times selected
     for (var i = 0; i < arrayOfObjects.length; i++) {
+      // var answer = event.target.getAttribute('id');
       if (img.id == arrayOfObjects[i].name) {
         arrayOfObjects[i].timeSelected++;
         //test times selected
@@ -180,7 +187,7 @@ imageParent.addEventListener('click', function(event) {
     var parentResponse = document.getElementById('response');
     for (i = 0; i < arrayOfObjects.length; i++) {
       var p = document.createElement('p');
-      p.textContent = arrayOfObjects[i].name + ' was selected ' + arrayOfObjects[i].timeSelected + ' time(s).';
+      p.textContent = arrayOfObjects[i].name + ' was shown ' + arrayOfObjects[i].timeShown + ' time(s). And it was selected ' + arrayOfObjects[i].timeSelected + ' time(s).';
       parentResponse.appendChild(p);
 
       chart();
