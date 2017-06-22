@@ -103,8 +103,6 @@ function setup() {
   }
 }
 
-//TODO change the constructor to get all the extensions
-
 //creating my constructor
 function MakeImages(name, filePath, timeShown, timeSelected) {
   this.name = name,
@@ -117,6 +115,7 @@ function chart() {
   var canvas = document.getElementById('chart');
   var ctx = canvas.getContext('2d');
 
+  console.log(chart);
   // modeled after the Getting Started example in the chartJS docs
   var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -146,9 +145,54 @@ function chart() {
   });
 }
 
+//===================LOCALSTORAGE ========================
+
+function createOrUpdateImageState() {
+  var imageState = {
+    bag: bag.timeSelected,
+    banana: banana.timeSelected,
+    bathroom: bathroom.timeSelected,
+    boots: boots.timeSelected,
+    breakfast: breakfast.timeSelected,
+    bubblegum: bubblegum.timeSelected,
+    chair: chair.timeSelected,
+    cthulhu: cthulhu.timeSelected,
+    dogDuck: dogDuck.timeSelected,
+    dragon: dragon.timeSelected,
+    pen: pen.timeSelected,
+    petSweep: petSweep.timeSelected,
+    scissors: scissors.timeSelected,
+    shark: shark.timeSelected,
+    sweep: sweep.timeSelected,
+    tauntaun: tauntaun.timeSelected,
+    unicorn: unicorn.timeSelected,
+    usb: usb.timeSelected,
+    water: water.timeSelected,
+    wineGlass: wineGlass.timeSelected
+  };
+
+  var stringifiedImageState = JSON.stringify(imageState);
+  localStorage.setItem('myImageData', stringifiedImageState);
+  //getting my stored data
+  var storedData = localStorage.getItem('imageState');
+  //parsing the string
+  var parsedImageState = JSON.parse(storedData);
+  return parsedImageState;
+};
+
+function getImageState() {
+  var storedData = localStorage.getItem('imageState');
+  //unsitringfy our data
+  var parsedImageState = JSON.parse(storedData);
+  return parsedImageState;
+}
+
+function deleteImageState() {
+  localStorage.removeItem('imageState');
+}
+
 //add the event listener
 imageParent.addEventListener('click', function() {
-
   //stop the game after 25 tries
   if (numberOfTries !== 0) {
     //check which image is clicked
@@ -181,7 +225,6 @@ imageParent.addEventListener('click', function() {
     //call our function to populate the images
     setup();
 
-
   } else {
     images.innerHTML = '';
     var parentResponse = document.getElementById('response');
@@ -191,6 +234,9 @@ imageParent.addEventListener('click', function() {
       parentResponse.appendChild(p);
 
       chart();
+
+      //This will take the data of how many times each image was selected and store it in the local storage
+      createOrUpdateImageState();
     }
   }
 });
