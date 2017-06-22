@@ -14,8 +14,12 @@ img {
   height: 300px;
   margin: 10px;
   border: 1px solid black;
+  transition: 0.5s;
 }
-
+img:hover {
+  transform: scale(0.9);
+  transition: 0.5s;
+}
 span{
   position: relative;
   top: 33px;
