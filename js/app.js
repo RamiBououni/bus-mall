@@ -187,22 +187,25 @@ function deleteImageState() {
 
 //add the event listener
 imageParent.addEventListener('click', function() {
+//capture the click and set it to this variable
+  var answer = event.target.getAttribute('id');
+  console.log('clicked: ' + answer);
+
   //stop the game after 25 tries
   if (numberOfTries !== 0) {
-
     //push the current images to the previous array
     previous = current.splice(0, 3);
 
     //add the number of times selected
     for (var i = 0; i < arrayOfObjects.length; i++) {
       // var answer = event.target.getAttribute('id');
-      if (img.id == arrayOfObjects[i].name) {
+      if (answer == arrayOfObjects[i].name) {
         arrayOfObjects[i].timeSelected++;
       }
     }
 
     //check to see which images we have to make sure we have no duplicate
-    console.log('=======');
+    console.log('<==========================>');
     console.log('previous is:' + previous);
 
     //to make the test stop at 25
