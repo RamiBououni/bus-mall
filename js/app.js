@@ -36,11 +36,6 @@ var wineGlass = new MakeImages('wineGlass');
 
 var arrayOfObjects = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, water, wineGlass];
 
-//test generateRandomImageName
-console.log(generateRandomImageName());
-//test random number
-console.log(Math.floor(Math.random() * imageNames.length));
-
 setup();
 
 //generate random image name
@@ -67,8 +62,7 @@ function renderImage(imgName) {
     img.setAttribute('id', imgName);
     imageParent.appendChild(img);
   }
-  //check my images IDs
-  console.log(img.id);
+
 }
 
 //setup images on the page
@@ -195,8 +189,6 @@ function deleteImageState() {
 imageParent.addEventListener('click', function() {
   //stop the game after 25 tries
   if (numberOfTries !== 0) {
-    //check which image is clicked
-    console.log(img.id);
 
     //push the current images to the previous array
     previous = current.splice(0, 3);
@@ -206,9 +198,6 @@ imageParent.addEventListener('click', function() {
       // var answer = event.target.getAttribute('id');
       if (img.id == arrayOfObjects[i].name) {
         arrayOfObjects[i].timeSelected++;
-        //test times selected
-        console.log('555555555');
-        console.log(arrayOfObjects[i].name + ' was selected:' + arrayOfObjects[i].timeSelected + ' time.');
       }
     }
 
