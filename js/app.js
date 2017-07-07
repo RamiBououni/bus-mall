@@ -11,9 +11,6 @@ var numberOfTries = 25;
 
 var imageNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'];
 
-//show my local storage
-console.log(localStorage);
-
 //making an array of objects for each image
 
 var bag = new MakeImages('bag');
@@ -39,6 +36,7 @@ var wineGlass = new MakeImages('wineGlass');
 
 var arrayOfObjects = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, water, wineGlass];
 
+getImageState();
 setup();
 
 //generate random image name
@@ -126,7 +124,7 @@ function chart() {
         backgroundColor: 'rgb(25, 99, 131)',
         borderColor: 'rgb(19, 9, 11)',
         data: [bag.timeSelected, banana.timeSelected, bathroom.timeSelected, boots.timeSelected, breakfast.timeSelected, bubblegum.timeSelected, chair.timeSelected, cthulhu.timeSelected, dogDuck.timeSelected, dragon.timeSelected, pen.timeSelected, petSweep.timeSelected, scissors.timeSelected, shark.timeSelected, sweep.timeSelected, tauntaun.timeSelected, unicorn.timeSelected, usb.timeSelected, water.timeSelected, wineGlass.timeSelected],
-      }, {
+      }, {        //To add another table data
         label: 'Number of times images was shown',
         backgroundColor: 'rgb(33, 131, 25)',
         borderColor: 'rgb(19, 9, 11)',
@@ -138,7 +136,7 @@ function chart() {
     options: {
       legend: {
         labels: {
-          fontColor: 'red',
+          fontColor: 'red', //to change the color of the title for the table
           fontSize: 18
         }
       },
