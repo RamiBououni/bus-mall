@@ -123,7 +123,7 @@ function chart() {
         backgroundColor: 'rgb(25, 99, 131)',
         borderColor: 'rgb(19, 9, 11)',
         data: [bag.timeSelected, banana.timeSelected, bathroom.timeSelected, boots.timeSelected, breakfast.timeSelected, bubblegum.timeSelected, chair.timeSelected, cthulhu.timeSelected, dogDuck.timeSelected, dragon.timeSelected, pen.timeSelected, petSweep.timeSelected, scissors.timeSelected, shark.timeSelected, sweep.timeSelected, tauntaun.timeSelected, unicorn.timeSelected, usb.timeSelected, water.timeSelected, wineGlass.timeSelected],
-      }, {
+      }, {        //To add another table data
         label: 'Number of times images was shown',
         backgroundColor: 'rgb(33, 131, 25)',
         borderColor: 'rgb(19, 9, 11)',
@@ -135,7 +135,7 @@ function chart() {
     options: {
       legend: {
         labels: {
-          fontColor: 'red',
+          fontColor: 'red', //to change the color of the title for the table
           fontSize: 18
         }
       },
@@ -256,6 +256,3 @@ imageParent.addEventListener('click', function() {
     }
   }
 });
-
-
-//
