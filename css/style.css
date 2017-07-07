@@ -4,9 +4,13 @@ html {
 }
 
 body {
-  color: #552591;
   font-family: monospace, sans-serif;
   font-size: 26px;
+  margin: 20px;
+}
+
+h1 {
+  color: #552591;
 }
 
 img {
@@ -16,11 +20,13 @@ img {
   border: 1px solid black;
   transition: 0.5s;
 }
+
 img:hover {
   transform: scale(0.9);
   transition: 0.5s;
 }
-span{
+
+span {
   position: relative;
   top: 33px;
 }

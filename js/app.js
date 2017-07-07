@@ -120,18 +120,40 @@ function chart() {
       labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'],
       datasets: [{
         label: 'Number of times images was selected',
-        backgroundColor: 'rgb(131, 25, 25)',
+        backgroundColor: 'rgb(25, 99, 131)',
         borderColor: 'rgb(19, 9, 11)',
         data: [bag.timeSelected, banana.timeSelected, bathroom.timeSelected, boots.timeSelected, breakfast.timeSelected, bubblegum.timeSelected, chair.timeSelected, cthulhu.timeSelected, dogDuck.timeSelected, dragon.timeSelected, pen.timeSelected, petSweep.timeSelected, scissors.timeSelected, shark.timeSelected, sweep.timeSelected, tauntaun.timeSelected, unicorn.timeSelected, usb.timeSelected, water.timeSelected, wineGlass.timeSelected],
+      }, {
+        label: 'Number of times images was shown',
+        backgroundColor: 'rgb(33, 131, 25)',
+        borderColor: 'rgb(19, 9, 11)',
+        data: [bag.timeShown, banana.timeShown, bathroom.timeShown, boots.timeShown, breakfast.timeShown, bubblegum.timeShown, chair.timeShown, cthulhu.timeShown, dogDuck.timeShown, dragon.timeShown, pen.timeShown, petSweep.timeShown, scissors.timeShown, shark.timeShown, sweep.timeShown, tauntaun.timeShown, unicorn.timeShown, usb.timeShown, water.timeShown, wineGlass.timeShown],
       }]
     },
 
     // Configuration options go here
     options: {
+      legend: {
+        labels: {
+          fontColor: 'red',
+          fontSize: 18
+        }
+      },
       scales: {
+        xAxes: [{
+          gridLines: {
+            display: false,
+          },
+          ticks: {
+            fontColor: 'rgba(31, 44, 161, 0.97)', // To change the X axe label color
+            fontSize: 18
+          },
+        }],
         yAxes: [{
           ticks: {
-            beginAtZero: true
+            beginAtZero: true,
+            fontColor: 'rgba(31, 44, 161, 0.97)', // To change the Y axe label color
+            fontSize: 18
           }
         }]
       }
@@ -187,7 +209,7 @@ function deleteImageState() {
 
 //add the event listener
 imageParent.addEventListener('click', function() {
-//capture the click and set it to this variable
+  //capture the click and set it to this variable
   var answer = event.target.getAttribute('id');
   console.log('clicked: ' + answer);
 
@@ -201,6 +223,8 @@ imageParent.addEventListener('click', function() {
       // var answer = event.target.getAttribute('id');
       if (answer == arrayOfObjects[i].name) {
         arrayOfObjects[i].timeSelected++;
+        //This will take the data of how many times each image was selected and store it in the local storage
+        createOrUpdateImageState();
       }
     }
 
@@ -222,13 +246,13 @@ imageParent.addEventListener('click', function() {
     var parentResponse = document.getElementById('response');
     for (i = 0; i < arrayOfObjects.length; i++) {
       var p = document.createElement('p');
-      p.textContent = arrayOfObjects[i].name + ' was shown ' + arrayOfObjects[i].timeShown + ' time(s). And it was selected ' + arrayOfObjects[i].timeSelected + ' time(s).';
+      var h3 = document.createElement('h3');
+      h3.textContent = arrayOfObjects[i].name + ':';
+      p.textContent = 'Was shown ' + arrayOfObjects[i].timeShown + ' time(s). And it was selected ' + arrayOfObjects[i].timeSelected + ' time(s).';
+      parentResponse.appendChild(h3);
       parentResponse.appendChild(p);
 
       chart();
-
-      //This will take the data of how many times each image was selected and store it in the local storage
-      createOrUpdateImageState();
     }
   }
 });
