@@ -11,6 +11,9 @@ var numberOfTries = 25;
 
 var imageNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'];
 
+//show my local storage
+console.log(localStorage);
+
 //making an array of objects for each image
 
 var bag = new MakeImages('bag');
@@ -256,6 +259,3 @@ imageParent.addEventListener('click', function() {
     }
   }
 });
-
-
-//
